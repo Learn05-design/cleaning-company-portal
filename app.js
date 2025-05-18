@@ -1,11 +1,12 @@
-// Firebase Initialization (same as before)
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "your-project.firebaseapp.com",
-  projectId: "your-project",
-  storageBucket: "your-project.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef123456"
+  apiKey: "AIzaSyDCh0O9cGKmKxkjk90aRaCZ7S4G1hOCFck",
+  authDomain: "steam-ex.firebaseapp.com",
+  projectId: "steam-ex",
+  storageBucket: "steam-ex.firebasestorage.app",
+  messagingSenderId: "1026204699205",
+  appId: "1:1026204699205:web:944070b606a2379dee712c",
+  measurementId: "G-Q05ETLMLJC"
 };
 
 firebase.initializeApp(firebaseConfig);
