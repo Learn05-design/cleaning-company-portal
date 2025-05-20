@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaning Company Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --success: #2ecc71;
+            --light-gray: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+        }
+        .stat-card {
+            border-radius: 8px;
+            padding: 15px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        .border-danger-left {
+            border-left: 4px solid var(--danger);
+        }
+        .border-warning-left {
+            border-left: 4px solid var(--warning);
+        }
+        .border-success-left {
+            border-left: 4px solid var(--success);
+        }
+        .nav-tabs .nav-link {
+            border: none;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        .nav-tabs .nav-link.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            background: transparent;
+        }
+        .table-responsive {
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .table th {
+            background: var(--light-gray);
+            border-top: none;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+        .badge-in-progress {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        .badge-waiting {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .badge-closed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .client-info {
+            line-height: 1.3;
+        }
+        .section-title {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <!-- Stats Row -->
+        <div class="row mb-4">
+            <div class="col-md-2 stat-card">
+                <div class="stat-value">2</div>
+                <div class="stat-label">Incomplete</div>
+            </div>
+            <div class="col-md-2 stat-card">
+                <div class="stat-value">2</div>
+                <div class="stat-label">My work orders</div>
+            </div>
+            <div class="col-md-2 stat-card border-danger-left">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Urgent</div>
+            </div>
+            <div class="col-md-2 stat-card border-warning-left">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Overdue</div>
+            </div>
+            <div class="col-md-2 stat-card">
+                <div class="stat-value">6</div>
+                <div class="stat-label">Statuses</div>
+            </div>
+            <div class="col-md-2 stat-card border-success-left">
+                <div class="stat-value">€1,835.57</div>
+                <div class="stat-label">Receivables</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs mb-3" id="dashboardTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="leads-tab" data-bs-toggle="tab" data-bs-target="#leads" type="button">
+                            Leads
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="workorders-tab" data-bs-toggle="tab" data-bs-target="#workorders" type="button">
+                            Work Orders
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="sales-tab" data-bs-toggle="tab" data-bs-target="#sales" type="button">
+                            Sales
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="clients-tab" data-bs-toggle="tab" data-bs-target="#clients" type="button">
+                            Clients
+                        </button>
+                    </li>
+                    <!-- Add more tabs as needed -->
+                </ul>
+
+                <div class="tab-content" id="dashboardTabsContent">
+                    <!-- Leads Tab -->
+                    <div class="tab-pane fade show active" id="leads" role="tabpanel">
+                        <div class="mb-3">
+                            <button class="btn btn-sm btn-outline-secondary me-2">
+                                <i class="fas fa-plus"></i> Order
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary me-2">
+                                <i class="fas fa-file-invoice-dollar"></i> Estimate
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="fas fa-filter"></i> Filter
+                            </button>
+                        </div>
+                        <p>Leads content would go here</p>
+                    </div>
+
+                    <!-- Work Orders Tab -->
+                    <div class="tab-pane fade" id="workorders" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Order #</th>
+                                        <th>Scheduled for</th>
+                                        <th>Status</th>
+                                        <th>Client</th>
+                                        <th>Client address</th>
+                                        <th>Technician</th>
+                                        <th>Price</th>
+                                        <th>Ad campaign</th>
+                                        <th>Due date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="workOrdersBody">
+                                    <!-- Work orders will be loaded here from Firebase -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Sales Tab -->
+                    <div class="tab-pane fade" id="sales" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Order #</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Client</th>
+                                        <th>Technician</th>
+                                        <th>Amount</th>
+                                        <th>Source</th>
+                                        <th>Due</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="salesBody">
+                                    <!-- Sales data will be loaded here from Firebase -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Clients Tab -->
+                    <div class="tab-pane fade" id="clients" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Order #</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Client</th>
+                                        <th>Address</th>
+                                        <th>Technician</th>
+                                        <th>Amount</th>
+                                        <th>Source</th>
+                                        <th>Due</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="clientsBody">
+                                    <!-- Clients data will be loaded here from Firebase -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase and other scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase with your config
+        const firebaseConfig = {
+            apiKey: "AIzaSyDCh0O9cGKmKxkjk90aRaCZ7S4G1hOCFck",
+            authDomain: "steam-ex.firebaseapp.com",
+            projectId: "steam-ex",
+            storageBucket: "steam-ex.appspot.com",
+            messagingSenderId: "1026204699205",
+            appId: "1:1026204699205:web:944070b606a2379dee712c",
+            measurementId: "G-Q05ETLMLJC"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Load work orders data
+        function loadWorkOrders() {
+            const tbody = document.getElementById('workOrdersBody');
+            
+            db.collection("work_orders").orderBy("scheduled_for", "desc").limit(10).get()
+                .then((querySnapshot) => {
+                    tbody.innerHTML = '';
+                    querySnapshot.forEach((doc) => {
+                        const order = doc.data();
+                        const row = document.createElement('tr');
+                        
+                        // Format dates
+                        const scheduledDate = order.scheduled_for.toDate().toLocaleString();
+                        const dueDate = order.due_date.toDate().toLocaleString();
+                        
+                        // Status badge
+                        let statusClass = '';
+                        if (order.status === 'In progress') statusClass = 'badge-in-progress';
+                        else if (order.status === 'Waiting for goods') statusClass = 'badge-waiting';
+                        else if (order.status === 'Closed') statusClass = 'badge-closed';
+                        
+                        row.innerHTML = `
+                            <td>${order.order_number}</td>
+                            <td>${scheduledDate}</td>
+                            <td><span class="status-badge ${statusClass}">${order.status}</span></td>
+                            <td class="client-info">
+                                ${order.client_name}<br>
+                                <small class="text-muted">${order.client_phone}</small>
+                            </td>
+                            <td>${order.client_address}</td>
+                            <td>${order.technician}</td>
+                            <td>€${order.price.toFixed(2)}</td>
+                            <td>${order.campaign}</td>
+                            <td>${dueDate}</td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                })
+                .catch((error) => {
+                    console.error("Error loading work orders: ", error);
+                });
+        }
+
+        // Load all data when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadWorkOrders();
+            // You would add similar functions for sales, clients, etc.
+        });
+    </script>
+</body>
+</html>
