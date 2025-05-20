@@ -3,40 +3,40 @@ const firebaseConfig = {
   apiKey: "AIzaSyDCh0O9cGKmKxkjk90aRaCZ7S4G1hOCFck",
   authDomain: "steam-ex.firebaseapp.com",
   projectId: "steam-ex",
-  storageBucket: "steam-ex.firebasestorage.app",
+  storageBucket: "steam-ex.appspot.com", // ✅ Fixed this line
   messagingSenderId: "1026204699205",
   appId: "1:1026204699205:web:944070b606a2379dee712c",
   measurementId: "G-Q05ETLMLJC"
 };
 
-// Initialize Firebase (v8)
+// Initialize Firebase (v8 style)
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
-// Send login link
+// Send email login link
 function sendLoginLink() {
   const email = document.getElementById('email').value;
   const actionCodeSettings = {
-    url: window.location.origin + '/dashboard.html',
+    // ✅ Use your actual GitHub Pages path
+    url: 'https://learn05-design.github.io/cleaning-company-portal/dashboard.html',
     handleCodeInApp: true
   };
 
   auth.sendSignInLinkToEmail(email, actionCodeSettings)
     .then(() => {
-      // Save the email locally so we can use it when the link is clicked
       window.localStorage.setItem('emailForSignIn', email);
-      alert('Login link sent! Check your email.');
+      alert('Login link sent! Check your inbox.');
     })
     .catch(error => {
       alert('Error: ' + error.message);
     });
 }
 
-// Handle sign-in from link
+// Handle email login redirect
 if (auth.isSignInWithEmailLink(window.location.href)) {
   let email = window.localStorage.getItem('emailForSignIn');
   if (!email) {
-    email = prompt('Please provide your email for confirmation:');
+    email = prompt('Please enter your email for confirmation:');
   }
 
   auth.signInWithEmailLink(email, window.location.href)
@@ -48,4 +48,3 @@ if (auth.isSignInWithEmailLink(window.location.href)) {
       alert('Login failed: ' + error.message);
     });
 }
-
