@@ -1,13 +1,157 @@
+/* ===== Base Styles ===== */
 body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
 }
 
-.card {
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
+/* ===== Dashboard Container ===== */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===== Header Styles ===== */
+.dashboard-header {
+  background: #2c3e50;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-logo {
+  height: 40px;
+}
+
+.user-email {
+  margin-right: 15px;
+  font-size: 0.9rem;
+}
+
+/* ===== Stats Cards ===== */
+.stats-bar {
+  display: flex;
+  padding: 15px 30px;
+  background: white;
+  border-bottom: 1px solid #eee;
+  gap: 15px;
+  overflow-x: auto;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 150px;
+  background: white;
   border-radius: 8px;
   padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border-left: 4px solid #3498db; /* Default blue */
+}
+
+.stat-card.urgent {
+  border-left-color: #e74c3c; /* Red */
+}
+
+.stat-card.overdue {
+  border-left-color: #f39c12; /* Orange */
+}
+
+.stat-card.revenue {
+  border-left-color: #2ecc71; /* Green */
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+}
+
+/* ===== Table Styles ===== */
+.work-orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.work-orders-table th {
+  background: #ecf0f1;
+  font-weight: 600;
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+
+.work-orders-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+/* ===== Status Badges ===== */
+.status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-in-progress {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.status-completed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-overdue {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .stats-bar {
+    flex-wrap: wrap;
+  }
+  
+  .stat-card {
+    min-width: calc(50% - 10px);
+  }
+  
+  .dashboard-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .work-orders-table {
+    font-size: 14px;
+  }
 }
