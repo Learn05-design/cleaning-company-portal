@@ -1,4 +1,4 @@
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase v8 compatible config
 const firebaseConfig = {
   apiKey: "AIzaSyDCh0O9cGKmKxkjk90aRaCZ7S4G1hOCFck",
   authDomain: "steam-ex.firebaseapp.com",
@@ -9,11 +9,7 @@ const firebaseConfig = {
   measurementId: "G-Q05ETLMLJC"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
-// Initialize Firebase
+// Initialize Firebase (v8)
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
@@ -27,6 +23,8 @@ function sendLoginLink() {
 
   auth.sendSignInLinkToEmail(email, actionCodeSettings)
     .then(() => {
+      // Save the email locally so we can use it when the link is clicked
+      window.localStorage.setItem('emailForSignIn', email);
       alert('Login link sent! Check your email.');
     })
     .catch(error => {
@@ -34,11 +32,20 @@ function sendLoginLink() {
     });
 }
 
-// Check if returning from email link
+// Handle sign-in from link
 if (auth.isSignInWithEmailLink(window.location.href)) {
-  const email = prompt('Confirm your email:');
+  let email = window.localStorage.getItem('emailForSignIn');
+  if (!email) {
+    email = prompt('Please provide your email for confirmation:');
+  }
+
   auth.signInWithEmailLink(email, window.location.href)
     .then(() => {
+      window.localStorage.removeItem('emailForSignIn');
       window.location.href = 'dashboard.html';
+    })
+    .catch(error => {
+      alert('Login failed: ' + error.message);
     });
 }
+
